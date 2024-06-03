@@ -11,7 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 @AllArgsConstructor
-public class ChatGptHistotyService {
+public class ChatGptHistoryService {
 
     private final Map<Long, ChatHistory> chatHistoryMap = new ConcurrentHashMap<>();
 

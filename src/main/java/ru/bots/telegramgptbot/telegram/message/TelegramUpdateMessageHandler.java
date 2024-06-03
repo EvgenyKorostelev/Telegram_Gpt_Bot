@@ -28,7 +28,7 @@ public class TelegramUpdateMessageHandler {
         if(message.hasVoice() || message.hasText()){
             telegramAsyncMessageSender.sendMessageAsync(chatId,
                     () -> handleMessageAsync(message),
-                    this::getErrorMessage
+                    throwable -> getErrorMessage(throwable, chatId)
                     );
         }
         return null;
@@ -39,13 +39,13 @@ public class TelegramUpdateMessageHandler {
             return telegramVoiceHandler.processVoice(message);
         } else {
             return telegramTextHandler.processTextMessage(message);
-
         }
     }
 
-    private SendMessage getErrorMessage(Throwable throwable) {
+    private SendMessage getErrorMessage(Throwable throwable, String chatId) {
             log.error("Произошла ошибка", throwable);
             return SendMessage.builder()
+                    .chatId(chatId)
                     .text("Произошла ошибка попробуйте позже . . .")
                     .build();
     }

@@ -10,7 +10,8 @@ import ru.bots.telegramgptbot.openai.api.OpenAiClient;
 public class OpenAiConfiguration {
 
     @Bean
-    public OpenAiClient openAiClient(@Value("${openai.token}") String botToken, RestTemplateBuilder restTemplateBuilder){
+    public OpenAiClient openAiClient(@Value("${openai.token}") String botToken,
+                                     RestTemplateBuilder restTemplateBuilder){
         return new OpenAiClient(botToken, restTemplateBuilder.build());
     }
 }

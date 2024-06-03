@@ -12,15 +12,15 @@ import ru.bots.telegramgptbot.openai.api.OpenAiClient;
 public class ChatGptService {
 
     private final OpenAiClient openAiClient;
-    private final ChatGptHistotyService chatGptHistotyService;
+    private final ChatGptHistoryService chatGptHistoryService;
 
 
     @Nonnull
     public String getResponseChatForUser(Long userId, String userTextInput) {
 
-        chatGptHistotyService.createHistoryIfNotExist(userId);
+        chatGptHistoryService.createHistoryIfNotExist(userId);
 
-        var history = chatGptHistotyService.addMessageToHistory(userId, Message.builder()
+        var history = chatGptHistoryService.addMessageToHistory(userId, Message.builder()
                 .content(userTextInput)
                 .role("user")
                 .build());
@@ -33,7 +33,7 @@ public class ChatGptService {
 
         var messageFromGpt = response.choices().get(0).message();
 
-        chatGptHistotyService.addMessageToHistory(userId, messageFromGpt);
+        chatGptHistoryService.addMessageToHistory(userId, messageFromGpt);
 
         return messageFromGpt.content();
     }

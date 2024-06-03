@@ -17,7 +17,7 @@ public class TelegramCommandsDispatcher {
 
     public BotApiMethod<?> processCommand(Message message){
 
-        if(isCommand(message)){
+        if(!isCommand(message)){
            throw new IllegalArgumentException("Not a command passed");
         }
         var text = message.getText();
