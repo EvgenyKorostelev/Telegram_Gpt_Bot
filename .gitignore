@@ -463,3 +463,4 @@ censor_dict.txt
 to_json.py
 .env
 .vscode
+application.properties
